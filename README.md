@@ -1,2 +1,2 @@
-# CFVFDDesktopRepository
-CFVFD Desktop Repository
+# CFVFDDesktop
+CFVFD Desktop
