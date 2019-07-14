@@ -16,4 +16,4 @@ Staffed Positions:
 Staffed positions are composed of a Schedule, Position, and Member object.
 
 Test Requests:
-Each method tests a different portion of the api to ensure that the returned data is what you requested
+Each method tests a different portion of the api to ensure that the returned data is what you requested or you can run all tests by calling the RunTestSuite() method.
