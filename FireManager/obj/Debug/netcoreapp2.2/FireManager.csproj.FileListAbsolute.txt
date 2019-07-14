@@ -1,0 +1,43 @@
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.deps.json
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.runtimeconfig.json
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.runtimeconfig.dev.json
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.dll
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.pdb
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.csprojAssemblyReference.cache
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.csproj.CoreCompileInputs.cache
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorAssemblyInfo.cache
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorAssemblyInfo.cs
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.AssemblyInfoInputs.cache
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.AssemblyInfo.cs
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorTargetAssemblyInfo.cache
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.dll
+C:\Users\Wayne\source\repos\Core\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.pdb
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.deps.json
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.runtimeconfig.json
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.runtimeconfig.dev.json
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.dll
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.pdb
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.csproj.CoreCompileInputs.cache
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorAssemblyInfo.cache
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorAssemblyInfo.cs
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.AssemblyInfoInputs.cache
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.AssemblyInfo.cs
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorTargetAssemblyInfo.cache
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.dll
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.pdb
+C:\Users\Wayne\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.csprojAssemblyReference.cache
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.deps.json
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.runtimeconfig.json
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.runtimeconfig.dev.json
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.dll
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\bin\Debug\netcoreapp2.2\FireManager.pdb
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.csproj.CoreCompileInputs.cache
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorAssemblyInfo.cache
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorAssemblyInfo.cs
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.AssemblyInfoInputs.cache
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.AssemblyInfo.cs
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.RazorTargetAssemblyInfo.cache
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.dll
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.pdb
+C:\Users\wayne.davis\source\repos\CFVFD Desktop Core Project\Libraries\FireManager\obj\Debug\netcoreapp2.2\FireManager.csprojAssemblyReference.cache
