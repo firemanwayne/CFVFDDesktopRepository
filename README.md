@@ -1,16 +1,16 @@
-# Fire Manager API
-Fire Manager API Library
+# FireManager Api
+FireManager Api Library
 
-Library used to query FireManager.net's database based on your credentials supplied by Fire Manager. Retrieved XML data is deserialized into objects that can be further manipulated for the clients intended use.
+Library used to query Aladtec's FireManager database based on your credentials supplied by Aladtec. Retrieved XML data is deserialized into objects that can be further manipulated for the clients use.
 
 Schedules:
-Schedules that are defined in Fire Manager's database.
+Schedules that are defined in FireManager's database.
 
 Positions:
-Positions that are defined in Fire Manager's database
+Positions that are defined in FireManager's database
 
 Members:
-Members that are stored in Fire Managers database.
+Members that are stored in FireManagers database.
 
 Staffed Positions:
 Staffed positions are composed of a Schedule, Position, and Member object.
