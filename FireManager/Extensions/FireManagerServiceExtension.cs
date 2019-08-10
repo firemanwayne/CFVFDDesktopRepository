@@ -12,20 +12,19 @@ namespace FireManager.Extensions
     {
         public static void AddFireManager(this IServiceCollection services, Action<FireManagerOptions> options, bool RunTests)
         {
-            services.Configure(options);            
+            services.Configure(options);
+
+            services.AddHttpClient();
 
             services.AddScoped<IRequests, Requests>();
             services.AddScoped<IMemberRequest, MemberRequest>();
             services.AddScoped<IScheduleRequest, ScheduleRequest>();
             services.AddScoped<IPositionRequest, PositionRequest>();
             services.AddScoped<IStaffedPositionRequest, StaffedPositionRequest>();
+            services.AddScoped<ITestRequests, TestRequests>();
 
-            if (RunTests)
-            {
-                services.AddHttpClient();
-                services.AddScoped<ITestRequests, TestRequests>();
-                services.RunTests().Wait();
-            }
+            if (RunTests)          
+                services.RunTests().Wait();            
         }
         
         private async static Task RunTests(this IServiceCollection servies)
