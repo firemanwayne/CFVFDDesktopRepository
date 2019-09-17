@@ -68,7 +68,7 @@ public interface IStaffedPositions
 ```
 
 ## Testing:
-By setting the RunTests parameter to true, you will run the test suite evertime the application starts up. If you wish to run tests manually then set the parameter to false, inject the interface 
+By setting the RunTests parameter to true, the test suite will run everytime the application starts up. If you wish to run tests manually then set the parameter to false, and inject the interface you want to test
 ```c#
 public interface ITestRequests
 ```
