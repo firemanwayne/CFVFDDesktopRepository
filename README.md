@@ -25,7 +25,7 @@ Schedules that are defined in FireManager's database.
 public interface IScheduleRequest
 {
    Task<Stream> StreamSchedulesAsync();
-   Task<IList<FireManagerSchedule>> GetSchedulesAsync();
+   IAsyncEnumerable<FireManagerSchedule> GetSchedulesAsync();
 }
 ```
 
@@ -36,7 +36,7 @@ Positions that are defined in FireManager's database
 public interface IPositionRequest
 {
    Task<Stream> StreamPositionsAsync();
-   Task<IList<FireManagerPosition>> GetPositionsAsync();
+   IAsyncEnumerable<FireManagerPosition> GetPositionsAsync();
 }
 ```
 
@@ -47,7 +47,7 @@ Members that are stored in FireManagers database.
 public interface IMemberRequest
 {
    Task<Stream> StreamMembersAsync(bool IsActive);
-   Task<IList<FireManagerMember>> GetMembersAsync(bool IsActive);
+   IAsyncEnumerable<FireManagerMember> GetMembersAsync(bool IsActive);
 }
 ```
 
@@ -77,9 +77,9 @@ into a controller and call one of the interface methods:
 ```c#
 public interface ITestRequests
 {
-   Task<IList<FireManagerMember>> TestMemberRequest();
-   Task<IList<FireManagerSchedule>> TestScheduleRequest();
-   Task<IList<FireManagerPosition>> TestPositionRequest();
+   IAsyncEnumerable<FireManagerMember> TestMemberRequest();
+   IAsyncEnumerable<FireManagerSchedule> TestScheduleRequest();
+   IAsyncEnumerable<FireManagerPosition> TestPositionRequest();
    Task<IList<FireManagerStaffedPosition>> TestStaffedPositionRequest(DateTime Date);
    Task<IList<FireManagerStaffedPosition>> TestStaffedPositionRequest(int Year, int Month);
 }
