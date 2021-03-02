@@ -1,7 +1,4 @@
-﻿using FireManager.Entities.MemberAggregate;
-using FireManager.Entities.PositionAggregate;
-using FireManager.Entities.ScheduleAggregate;
-using FireManager.Entities.StaffedPositionAggregate;
+﻿using FireManager.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,19 +17,19 @@ namespace FireManager.Tests
         /// Test method for Members
         /// </summary>
         /// <returns>List of FireManager Members</returns>
-        Task<IList<FireManagerMember>> TestMemberRequest();
+        IAsyncEnumerable<FireManagerMember> TestMemberRequest();
 
         /// <summary>
         /// Test method for Schedules
         /// </summary>
         /// <returns>List of FireManager Schedules</returns>
-        Task<IList<FireManagerSchedule>> TestScheduleRequest();
+        IAsyncEnumerable<FireManagerSchedule> TestScheduleRequest();
 
         /// <summary>
         /// Test method for Positions
         /// </summary>
         /// <returns>List of FireManager Positions</returns>
-        Task<IList<FireManagerPosition>> TestPositionRequest();
+        IAsyncEnumerable<FireManagerPosition> TestPositionRequest();
 
         /// <summary>
         /// Test method for Staffed Positions

@@ -1,8 +1,6 @@
-﻿using FireManager.Entities.MemberAggregate;
-using System;
+﻿using FireManager.Entities;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FireManager.Interface
@@ -10,6 +8,6 @@ namespace FireManager.Interface
     public interface IMemberRequest
     {
         Task<Stream> StreamMembersAsync(bool ActiveOnly);
-        Task<IList<FireManagerMember>> GetMembersAsync(bool IsActive);
+        IAsyncEnumerable<FireManagerMember> GetMembersAsync(bool IsActive);
     }
 }

@@ -1,10 +1,7 @@
 ﻿using FireManager.Concrete;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace FireManager.Entities.StaffedPositionAggregate
+namespace FireManager.Entities
 {
     public class FireManagerStaffedPosition
     {
@@ -12,13 +9,13 @@ namespace FireManager.Entities.StaffedPositionAggregate
         private FireManagerStaffedPosition(Schedule Schedule, Position Position, Member Member, DateTime Begin, DateTime End)
         {
             if (Schedule == null)
-                throw new ArgumentNullException("Schedule cannot be null");
+                throw new ArgumentNullException(nameof(Schedule));
 
             if (Position == null)
-                throw new ArgumentNullException("Position cannot be null");
+                throw new ArgumentNullException(nameof(Position));
 
             if (Member == null)
-                throw new ArgumentNullException("Position cannot be null");
+                throw new ArgumentNullException(nameof(Member));
 
             ScheduleId = Schedule.Id;
             ScheduleName = Schedule.Name?.Value;
@@ -30,20 +27,19 @@ namespace FireManager.Entities.StaffedPositionAggregate
             EndShift = End;
         }
 
-        public static FireManagerStaffedPosition Instance(Schedule Schedule, Position Position, Member Member, DateTime Begin, DateTime End)
+        public static FireManagerStaffedPosition Instance(Schedule schedule, Position position, Member member, DateTime begin, DateTime end)
         {
-            return new FireManagerStaffedPosition(Schedule, Position, Member, Begin, End);
+            return new FireManagerStaffedPosition(schedule, position, member, begin, end);
         }
 
-        public int ScheduleId { get; private set; }
-        public string ScheduleName { get; private set; }
-        public int PositionId { get; private set; }
-        public string PositionName { get; private set; }
-        public int MemberId { get; private set; }
-        public string MemberName { get; private set; }
-        public DateTime StartShift { get; private set; }
-        public DateTime EndShift { get; private set; }
-
+        public int ScheduleId { get; }
+        public string ScheduleName { get; }
+        public int PositionId { get; }
+        public string PositionName { get; }
+        public int MemberId { get; }
+        public string MemberName { get; }
+        public DateTime StartShift { get; }
+        public DateTime EndShift { get; }
         public TimeSpan TotalHours { get => EndShift - StartShift; }
     }
 }

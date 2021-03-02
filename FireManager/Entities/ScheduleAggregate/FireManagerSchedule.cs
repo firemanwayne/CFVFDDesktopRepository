@@ -1,20 +1,18 @@
 ﻿using FireManager.Concrete;
-using FireManager.Entities.PositionAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace FireManager.Entities.ScheduleAggregate
+namespace FireManager.Entities
 {
     public class FireManagerSchedule
     {
-        private Schedule schedule;
+        readonly Schedule schedule;
 
         private FireManagerSchedule() { }
         private FireManagerSchedule(Schedule Schedule)
         {
-            schedule = Schedule ?? throw new ArgumentNullException("Schedule object cannot be null");
+            schedule = Schedule ?? throw new ArgumentNullException(nameof(Schedule));
 
             Id = Schedule.Id;
             Name = Schedule.Name.Value;
@@ -50,7 +48,7 @@ namespace FireManager.Entities.ScheduleAggregate
         public int PositionCount { get; private set; }
         public IList<FireManagerPosition> Positions { get; private set; } = new List<FireManagerPosition>();
 
-        private void AddPosition(Position Position)
+        void AddPosition(Position Position)
         {
             if (schedule != null)
             {

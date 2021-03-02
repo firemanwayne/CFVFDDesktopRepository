@@ -1,4 +1,4 @@
-﻿using FireManager.Entities.StaffedPositionAggregate;
+﻿using FireManager.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +14,6 @@ namespace FireManager.Interface
 
         Task<IList<FireManagerStaffedPosition>> GetStaffedPositionsAsync(int Month, int Year);
         Task<IList<FireManagerStaffedPosition>> GetStaffedPositionsAsync(DateTime RequestDate);
-        Task<IList<FireManagerStaffedPosition>> GetStaffedPositionsAsync(DateTime StartDate, DateTime EndDate);        
+        Task<IList<FireManagerStaffedPosition>> GetStaffedPositionsAsync(DateTime StartDate, DateTime EndDate);
     }
 }

@@ -1,0 +1,11 @@
+L:\Projects\firemanwayne\FireManager\obj\Debug\net5.0\FireManager.GeneratedMSBuildEditorConfig.editorconfig
+L:\Projects\firemanwayne\FireManager\obj\Debug\net5.0\FireManager.AssemblyInfoInputs.cache
+L:\Projects\firemanwayne\FireManager\obj\Debug\net5.0\FireManager.AssemblyInfo.cs
+L:\Projects\firemanwayne\FireManager\obj\Debug\net5.0\FireManager.csproj.CoreCompileInputs.cache
+L:\Projects\firemanwayne\FireManager\bin\Debug\net5.0\FireManager.deps.json
+L:\Projects\firemanwayne\FireManager\bin\Debug\net5.0\FireManager.dll
+L:\Projects\firemanwayne\FireManager\bin\Debug\net5.0\ref\FireManager.dll
+L:\Projects\firemanwayne\FireManager\bin\Debug\net5.0\FireManager.pdb
+L:\Projects\firemanwayne\FireManager\obj\Debug\net5.0\FireManager.dll
+L:\Projects\firemanwayne\FireManager\obj\Debug\net5.0\ref\FireManager.dll
+L:\Projects\firemanwayne\FireManager\obj\Debug\net5.0\FireManager.pdb

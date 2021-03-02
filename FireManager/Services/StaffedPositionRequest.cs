@@ -1,8 +1,8 @@
-﻿using FireManager.Concrete;
-using FireManager.Entities.StaffedPositionAggregate;
+﻿using FireManager.Abstract;
+using FireManager.Concrete;
+using FireManager.Entities;
 using FireManager.Extensions;
 using FireManager.Interface;
-using FireManager.Queries;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -14,27 +14,19 @@ using System.Xml.Serialization;
 
 namespace FireManager.Services
 {
-    public class StaffedPositionRequest : IStaffedPositionRequest
+    internal class StaffedPositionRequest : RequestBase, IStaffedPositionRequest
     {
-        private readonly IRequests Requests;
-        private readonly FireManagerOptions Options;
-        private readonly IHttpClientFactory ClientFactory;
-
         public StaffedPositionRequest(
             IRequests Requests,
-            IHttpClientFactory ClientFactory,
-            IOptions<FireManagerOptions> Options)
-        {
-            this.Requests = Requests;
-            this.Options = Options.Value;
-            this.ClientFactory = ClientFactory;
-        }
+            IHttpClientFactory Factory,
+            IOptions<FireManagerOptions> Options) : base(Requests, Factory, Options)
+        { }
 
         public async Task<Stream> StreamStaffedPositionsAsync(DateTime RequestDate)
         {
             try
             {
-                var Client = ClientFactory.CreateClient();
+                var Client = Factory.CreateClient();
                 var Content = new FormUrlEncodedContent(Requests.AllSchedulesByDate(RequestDate));
 
                 var Message = CreatePostMessage(Options.Url, Content);
@@ -42,7 +34,7 @@ namespace FireManager.Services
 
                 return await Response.Content.ReadAsStreamAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Fire Manager Request Error: {ex.Message}");
                 return null;
@@ -52,15 +44,15 @@ namespace FireManager.Services
         {
             try
             {
-                var Client = ClientFactory.CreateClient();
+                var Client = Factory.CreateClient();
                 var Content = new FormUrlEncodedContent(Requests.AllSchedulesByDateRange(StartDate, EndDate));
 
-                var Message = CreatePostMessage(Options.Url, Content);               
+                var Message = CreatePostMessage(Options.Url, Content);
                 var Response = await Client.SendAsync(Message, HttpCompletionOption.ResponseHeadersRead);
 
                 return await Response.Content.ReadAsStreamAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Fire Manager Request Error: {ex.Message}");
                 return null;
@@ -70,15 +62,15 @@ namespace FireManager.Services
         {
             try
             {
-                var Client = ClientFactory.CreateClient();
+                var Client = Factory.CreateClient();
                 var Content = new FormUrlEncodedContent(Requests.AllSchedulesByMonth(new DateTime(Year, Month, 1)));
-                
-                var Message = CreatePostMessage(Options.Url, Content);                
+
+                var Message = CreatePostMessage(Options.Url, Content);
                 var Response = await Client.SendAsync(Message, HttpCompletionOption.ResponseHeadersRead);
 
                 return await Response.Content.ReadAsStreamAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Fire Manager Request Error: {ex.Message}");
                 return null;
@@ -90,55 +82,57 @@ namespace FireManager.Services
             IList<FireManagerStaffedPosition> FireManagerStaffedPositions = new List<FireManagerStaffedPosition>();
             var Serializer = new XmlSerializer(typeof(Results));
 
-            using (var xReader = XmlReader.Create(await StreamStaffedPositionsAsync(RequestDate)))
-            {
-                var Results = (Results)Serializer.Deserialize(xReader);
+            using var xReader = XmlReader.Create(await StreamStaffedPositionsAsync(RequestDate));
+            var Results = (Results)Serializer.Deserialize(xReader);
 
-                foreach (var ResultRange in Results.ResultsRanges.Range)
-                    FireManagerStaffedPositions.Add(FireManagerStaffedPosition.Instance(ResultRange.Schedule, ResultRange.Position, ResultRange.Member, ResultRange.Begin, ResultRange.End));
+            foreach (var range in Results.ResultsRanges.Range)
+                FireManagerStaffedPositions.Add(
+                    FireManagerStaffedPosition.Instance(
+                        schedule: range.Schedule,
+                        position: range.Position,
+                        member: range.Member,
+                        begin: range.Begin,
+                        end: range.End));
 
-                return FireManagerStaffedPositions;
-            }
+            return FireManagerStaffedPositions;
         }
         public async Task<IList<FireManagerStaffedPosition>> GetStaffedPositionsAsync(DateTime StartDate, DateTime EndDate)
         {
             IList<FireManagerStaffedPosition> FireManagerStaffedPositions = new List<FireManagerStaffedPosition>();
             var Serializer = new XmlSerializer(typeof(Results));
 
-            using (var xReader = XmlReader.Create(await StreamStaffedPositionsAsync(StartDate, EndDate)))
-            {
-                var Results = (Results)Serializer.Deserialize(xReader);
+            using var xReader = XmlReader.Create(await StreamStaffedPositionsAsync(StartDate, EndDate));
+            var Results = (Results)Serializer.Deserialize(xReader);
 
-                foreach (var ResultRange in Results.ResultsRanges.Range)
-                    FireManagerStaffedPositions.Add(FireManagerStaffedPosition.Instance(ResultRange.Schedule, ResultRange.Position, ResultRange.Member, ResultRange.Begin, ResultRange.End));
+            foreach (var range in Results.ResultsRanges.Range)
+                FireManagerStaffedPositions.Add(
+                    FireManagerStaffedPosition.Instance(
+                        schedule: range.Schedule,
+                        position: range.Position,
+                        member: range.Member,
+                        begin: range.Begin,
+                        end: range.End));
 
-                return FireManagerStaffedPositions;
-            }
+            return FireManagerStaffedPositions;
         }
         public async Task<IList<FireManagerStaffedPosition>> GetStaffedPositionsAsync(int Month, int Year)
         {
             IList<FireManagerStaffedPosition> FireManagerStaffedPositions = new List<FireManagerStaffedPosition>();
             var Serializer = new XmlSerializer(typeof(Results));
 
-            using (var xReader = XmlReader.Create(await StreamStaffedPositionsAsync(Month, Year)))
-            {
-                var Results = (Results)Serializer.Deserialize(xReader);
+            using var xReader = XmlReader.Create(await StreamStaffedPositionsAsync(Month, Year));
+            var Results = (Results)Serializer.Deserialize(xReader);
 
-                foreach (var ResultRange in Results.ResultsRanges.Range)
-                    FireManagerStaffedPositions.Add(FireManagerStaffedPosition.Instance(ResultRange.Schedule, ResultRange.Position, ResultRange.Member, ResultRange.Begin, ResultRange.End));
+            foreach (var range in Results.ResultsRanges.Range)
+                FireManagerStaffedPositions.Add(
+                    FireManagerStaffedPosition.Instance(
+                        schedule: range.Schedule,
+                        position: range.Position,
+                        member: range.Member,
+                        begin: range.Begin,
+                        end: range.End));
 
-                return FireManagerStaffedPositions;
-            }
-        }
-
-        private static HttpRequestMessage CreatePostMessage(string Path, FormUrlEncodedContent Content)
-        {
-            var Message = new HttpRequestMessage();
-            Message.RequestUri = new Uri(Path);
-            Message.Method = HttpMethod.Post;
-            Message.Content = Content;
-
-            return Message;
+            return FireManagerStaffedPositions;
         }
     }
 }

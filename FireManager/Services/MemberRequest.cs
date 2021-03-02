@@ -1,8 +1,8 @@
-﻿using FireManager.Concrete;
-using FireManager.Entities.MemberAggregate;
+﻿using FireManager.Abstract;
+using FireManager.Concrete;
+using FireManager.Entities;
 using FireManager.Extensions;
 using FireManager.Interface;
-using FireManager.Queries;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -12,80 +12,58 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using static System.Console;
 
 namespace FireManager.Services
 {
-    public class MemberRequest : IMemberRequest
+    internal class MemberRequest : RequestBase, IMemberRequest
     {
-        private readonly IRequests Request;
-        private readonly FireManagerOptions Options;
-        private readonly IHttpClientFactory ClientFactory;
-
         public MemberRequest(
             IRequests Request,
-            IHttpClientFactory ClientFactory,
-            IOptions<FireManagerOptions> Options)
-        {
-            this.Request = Request;
-            this.Options = Options.Value;
-            this.ClientFactory = ClientFactory;
-        }
+            IHttpClientFactory Factory,
+            IOptions<FireManagerOptions> Options) : base(Request, Factory, Options)
+        { }
 
         public async Task<Stream> StreamMembersAsync(bool ActiveOnly)
         {
             try
             {
-                Console.WriteLine($"Sending fire manager request...");
+                WriteLine($"Sending fire manager request...");
 
                 HttpRequestMessage Message = null;
-                var Client = ClientFactory.CreateClient();
+                var Client = Factory.CreateClient();
 
                 if (ActiveOnly)
-                    Message = CreatePostMessage(Options.Url, new FormUrlEncodedContent(Request.AllActiveMembersRequest));
+                    Message = CreatePostMessage(Options.Url, new FormUrlEncodedContent(Requests.AllActiveMembersRequest));
                 else
-                    Message = CreatePostMessage(Options.Url, new FormUrlEncodedContent(Request.AllMembersRequest));
-
+                    Message = CreatePostMessage(Options.Url, new FormUrlEncodedContent(Requests.AllMembersRequest));
 
                 var Response = await Client.SendAsync(Message);
 
-                Console.WriteLine($"Waiting for a response...");
+                WriteLine($"Waiting for a response...");
 
                 return await Response.Content.ReadAsStreamAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine($"Fire Manager Request Error: {ex.Message}");
+                WriteLine($"Fire Manager Request Error: {ex.Message}");
                 return null;
             }
         }
-        public async Task<IList<FireManagerMember>> GetMembersAsync(bool IsActive)
+        public async IAsyncEnumerable<FireManagerMember> GetMembersAsync(bool IsActive)
         {
-            IList<FireManagerMember> FireManagerMembers = new List<FireManagerMember>();
             var Serializer = new XmlSerializer(typeof(Results));
-            using (var xReader = XmlReader.Create(await StreamMembersAsync(IsActive)))
-            {
-                Console.WriteLine("Streaming response...");
+            using var xReader = XmlReader.Create(await StreamMembersAsync(IsActive));
 
-                var Results = (Results)Serializer.Deserialize(xReader);
+            WriteLine("Streaming response...");
 
-                if (Results != null)
-                    foreach (var Member in Results.Members.Member.ToList())
-                        FireManagerMembers.Add(FireManagerMember.Instance(Member));
+            var Results = (Results)Serializer.Deserialize(xReader);
 
-                Console.WriteLine("Reesponse complete...");
+            if (Results != null)
+                foreach (var Member in Results.Members.Member.ToList())
+                    yield return Member;
 
-                return FireManagerMembers;
-            }
-        }
-
-        private static HttpRequestMessage CreatePostMessage(string Path, FormUrlEncodedContent Content)
-        {
-            var Message = new HttpRequestMessage();
-            Message.RequestUri = new Uri(Path);
-            Message.Method = HttpMethod.Post;
-            Message.Content = Content;
-
-            return Message;
+            WriteLine("Reesponse complete...");
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using FireManager.Concrete;
-using FireManager.Entities.ScheduleAggregate;
+﻿using FireManager.Abstract;
+using FireManager.Concrete;
+using FireManager.Entities;
 using FireManager.Extensions;
 using FireManager.Interface;
-using FireManager.Queries;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -15,21 +15,13 @@ using System.Xml.Serialization;
 
 namespace FireManager.Services
 {
-    public class ScheduleRequest : IScheduleRequest
-    {                
-        private readonly IRequests Requests;
-        private readonly FireManagerOptions Options;
-        private readonly IHttpClientFactory ClientFactory;
-
+    internal class ScheduleRequest : RequestBase, IScheduleRequest
+    {
         public ScheduleRequest(
             IRequests Requests,
-            IHttpClientFactory ClientFactory,
-            IOptions<FireManagerOptions> Options)
-        {            
-            this.Requests = Requests;
-            this.Options = Options.Value;
-            this.ClientFactory = ClientFactory;
-        }
+            IHttpClientFactory Factory,
+            IOptions<FireManagerOptions> Options) : base(Requests, Factory, Options)
+        { }
 
         public async Task<Stream> StreamSchedulesAsync()
         {
@@ -37,49 +29,34 @@ namespace FireManager.Services
             {
                 var Content = new FormUrlEncodedContent(Requests.AllSchedulesRequest);
 
-                var Client = ClientFactory.CreateClient();
+                var Client = Factory.CreateClient();
                 var Message = CreatePostMessage(Options.Url, Content);
                 var Response = await Client.SendAsync(Message, HttpCompletionOption.ResponseHeadersRead);
                 return await Response.Content.ReadAsStreamAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Fire Manager Request Error: {ex.Message}");
                 return null;
             }
         }
 
-        public async Task<IList<FireManagerSchedule>> GetSchedulesAsync()
+        public async IAsyncEnumerable<FireManagerSchedule> GetSchedulesAsync()
         {
-            IList<FireManagerSchedule> Schedules = new List<FireManagerSchedule>();
-
             var Serializer = new XmlSerializer(typeof(Results));
-            using (var xReader = XmlReader.Create(await StreamSchedulesAsync()))
+            using var xReader = XmlReader.Create(await StreamSchedulesAsync());
+            var Results = (Results)Serializer.Deserialize(xReader);
+
+            if (Results != null)
             {
-                var Results = (Results)Serializer.Deserialize(xReader);
+                var ScheduleResults = Results
+                    .Schedules
+                    .Schedule
+                    .ToList();
 
-                if (Results != null)
-                {
-                    var ScheduleResults = Results
-                        .Schedules
-                        .Schedule
-                        .ToList();
-
-                    foreach (var Schedule in ScheduleResults)
-                        Schedules.Add(FireManagerSchedule.Instance(Schedule.Id, Schedule.Name.Value));
-                }
-                return Schedules;
+                foreach (var Schedule in ScheduleResults)
+                    yield return FireManagerSchedule.Instance(Schedule.Id, Schedule.Name.Value);
             }
-        }
-
-        private static HttpRequestMessage CreatePostMessage(string Path, FormUrlEncodedContent Content)
-        {
-            var Message = new HttpRequestMessage();
-            Message.RequestUri = new Uri(Path);
-            Message.Method = HttpMethod.Post;
-            Message.Content = Content;
-
-            return Message;
         }
     }
 }
